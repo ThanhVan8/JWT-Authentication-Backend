@@ -41,7 +41,7 @@ export class AuthService {
   async register(authReq: RegisterReqDto): Promise<User> {
     const foundUser = await this.userService.findByEmail(authReq.email);
     if (foundUser) {
-      throw new BadRequestException('User already exists');
+      throw new BadRequestException('Email already used');
     }
 
     const hashedPassword = await bcrypt.hash(authReq.password, 10);
